@@ -10,8 +10,6 @@ let board = {
   9: ''
 }
 
-const isVertical = (board) => {
+const isVerticalWin = (board) => {
   return (((board[1] === board[4] && board[1] === board[7] && board[1] !== '') || (board[2] === board[5] && board[2] === board[8] && board[2] !== '') || (board[3] === board[6] && board[3] === board[9] && board[3] !== '')) ? true : false)
 }
-
-console.log(isVertical(board));
