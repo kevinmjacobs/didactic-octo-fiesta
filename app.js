@@ -2,15 +2,15 @@ const readline = require('readline')
 const { isDiagonalWin, isHorizontalWin, isVerticalWin } = require('./helpers.js')
 
 let board = {
-  A1: '',
-  A2: '',
-  A3: '',
-  B1: '',
-  B2: '',
-  B3: '',
-  C1: '', 
-  C2: '',
-  C3: ''
+  A1: ' ',
+  A2: ' ',
+  A3: ' ',
+  B1: ' ',
+  B2: ' ',
+  B3: ' ',
+  C1: ' ', 
+  C2: ' ',
+  C3: ' '
 }
 
 const rl = readline.createInterface({
@@ -47,6 +47,13 @@ const ticTacToeGame = (board, player) => {
         }
       })
     }
+  }
+  if (isDiagonalWin(board) || isHorizontalWin(board) || isVerticalWin(board)) {
+    rl.question(`Player ${player} Wins! Play again? (y/n)`, (answer) => {
+      (answer === 'y') && ticTacToeGame({A1: ' ', A2: ' ', A3: ' ', B1: ' ', B2: ' ', B3: ' ', C1: ' ', C2: ' ', C3: ' '}, 1);
+      console.log('Thanks for playing!');
+    })
+    console.log(`Player ${player} Wins!`)
   }
 }
 
