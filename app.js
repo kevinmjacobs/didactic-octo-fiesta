@@ -1,21 +1,21 @@
 const { isDiagonalWin, isHorizontalWin, isVerticalWin } = require('./helpers.js')
 
 let board = {
-  1: '',
-  2: '',
-  3: '',
-  4: '',
-  5: '',
-  6: '',
-  7: '', 
-  8: '',
-  9: ''
+  A1: '',
+  A2: '',
+  A3: '',
+  B1: '',
+  B2: '',
+  B3: '',
+  C1: '', 
+  C2: '',
+  C3: ''
 }
 
 console.log('Welcome to Tic-Tac-Toe!');
 
 const ticTacToeGame = (board, player) => {
-  console.log(`${board[1]} | ${board[2]} | ${board[3]} \n${board[4]} | ${board[5]} | ${board[6]} \n${board[7]} | ${board[8]} | ${board[9]}`);
+  console.log(`${board[A1]} | ${board[A2]} | ${board[A3]} \n${board[B1]} | ${board[B2]} | ${board[B3]} \n${board[C1]} | ${board[C2]} | ${board[C3]}`);
   if ((!isDiagonalWin(board)) && (!isHorizontalWin(board)) && (!isVerticalWin(board))) {
 
   }
