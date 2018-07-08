@@ -1,5 +1,5 @@
 const readline = require('readline')
-const { isDiagonalWin, isHorizontalWin, isVerticalWin } = require('./helpers.js')
+const { isDiagonalWin, isHorizontalWin, isVerticalWin, isBoardFull } = require('./helpers.js')
 
 let board = {
   A1: ' ',
@@ -25,7 +25,7 @@ const ticTacToeGame = (board, player) => {
   if ((!isDiagonalWin(board)) && (!isHorizontalWin(board)) && (!isVerticalWin(board))) {
     if (player === 1) {
       rl.question('Player 1 please fill in a square (X):', (answer) => {
-        if (board[answer] === undefined) {
+        if (board[answer] === undefined || board[answer] === 'O' || board[answer] === 'X') {
           console.log('Not a valid square');
           ticTacToeGame(board, player)
         }
@@ -37,7 +37,7 @@ const ticTacToeGame = (board, player) => {
     }
     if (player === 2) {
       rl.question('Player 2 please fill in a square (O):', (answer) => {
-        if (board[answer] === undefined) {
+        if (board[answer] === undefined || board[answer] === 'O' || board[answer] === 'X') {
           console.log('Not a valid square');
           ticTacToeGame(board, player)
         }
@@ -52,8 +52,8 @@ const ticTacToeGame = (board, player) => {
     rl.question(`Player ${player} Wins! Play again? (y/n)`, (answer) => {
       (answer === 'y') && ticTacToeGame({A1: ' ', A2: ' ', A3: ' ', B1: ' ', B2: ' ', B3: ' ', C1: ' ', C2: ' ', C3: ' '}, 1);
       console.log('Thanks for playing!');
+      process.exit();
     })
-    console.log(`Player ${player} Wins!`)
   }
 }
 
