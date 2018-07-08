@@ -1,5 +1,5 @@
 const readline = require('readline')
-const { isDiagonalWin, isHorizontalWin, isVerticalWin, checkBoard, rl } = require('./helpers.js')
+const { isDiagonalWin, isHorizontalWin, isVerticalWin, checkBoard, rl, showBoard } = require('./helpers.js')
 
 let board = {
   A1: ' ',
@@ -16,7 +16,7 @@ let board = {
 console.log('Welcome to Tic-Tac-Toe!');
 
 const ticTacToeGame = (board, player) => {
-  console.log(`${board.A1} | ${board.A2} | ${board.A3} \n${board.B1} | ${board.B2} | ${board.B3} \n${board.C1} | ${board.C2} | ${board.C3}`);
+  showBoard(board);
   if ((!isDiagonalWin(board)) && (!isHorizontalWin(board)) && (!isVerticalWin(board))) {
     if (player === 1) {
       rl.question('Player 1 please fill in a square (X):', (answer) => {
