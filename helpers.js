@@ -1,3 +1,10 @@
+const readline = require('readline')
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 const isVerticalWin = (board) => {
   return (((board.A1 === board.B1 && board.A1 === board.C1 && board.A1 !== ' ') || (board.A2 === board.B2 && board.A2 === board.C2 && board.A2 !== ' ') || (board.A3 === board.B3 && board.A3 === board.C3 && board.A3 !== ' ')) ? true : false);
 }
@@ -14,8 +21,28 @@ const isBoardFull = (board) => {
   return (board.A1 !== ' ' && board.A2 !== ' ' && board.A3 !== ' ' && board.B1 !== ' ' && board.B2 !== ' ' && board.B3 !== ' ' && board.C1 !== ' ' && board.C2 !== ' ' && board.C3 !== ' ');
 }
 
+const checkBoard = (board, player, callback) => {
+  if (isBoardFull(board)) {
+    rl.question('Stalemate. Play again? (y/n)', (answer) => {
+      (answer === 'y') && ticTacToeGame({A1: ' ', A2: ' ', A3: ' ', B1: ' ', B2: ' ', B3: ' ', C1: ' ', C2: ' ', C3: ' '}, 1);
+      console.log('Thanks for playing!');
+      process.exit();
+    })
+  } else if (isDiagonalWin(board) || isHorizontalWin(board) || isVerticalWin(board)) {
+    rl.question(`Player ${player} Wins! Play again? (y/n)`, (answer) => {
+      (answer === 'y') && ticTacToeGame({A1: ' ', A2: ' ', A3: ' ', B1: ' ', B2: ' ', B3: ' ', C1: ' ', C2: ' ', C3: ' '}, 1);
+      console.log('Thanks for playing!');
+      process.exit();
+    })
+  } else {
+    callback(board, (player === 1 ? 2 : 1));
+  } 
+}
+
 module.exports = {
   isDiagonalWin,
   isHorizontalWin,
-  isVerticalWin
+  isVerticalWin,
+  checkBoard,
+  rl
 }
