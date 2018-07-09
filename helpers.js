@@ -1,12 +1,11 @@
 const readline = require('readline')
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
 const showBoard = (board) => {
-  console.log(`${board.A1} | ${board.A2} | ${board.A3} \n${board.B1} | ${board.B2} | ${board.B3} \n${board.C1} | ${board.C2} | ${board.C3}`);
+  console.log(`    (1) (2) (3)  \n(A)  ${board.A1} | ${board.A2} | ${board.A3} \n(B)  ${board.B1} | ${board.B2} | ${board.B3} \n(C)  ${board.C1} | ${board.C2} | ${board.C3}`);
 }
 
 const isVerticalWin = (board) => {

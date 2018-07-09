@@ -1,6 +1,11 @@
 const readline = require('readline')
 const { isDiagonalWin, isHorizontalWin, isVerticalWin, checkBoard, rl, showBoard } = require('./helpers.js')
 
+const moves = {
+  1: 'X',
+  2: 'O'
+}
+
 let board = {
   A1: ' ',
   A2: ' ',
@@ -18,32 +23,21 @@ console.log('Welcome to Tic-Tac-Toe!');
 const ticTacToeGame = (board, player) => {
   showBoard(board);
   if ((!isDiagonalWin(board)) && (!isHorizontalWin(board)) && (!isVerticalWin(board))) {
-    if (player === 1) {
-      rl.question('Player 1 please fill in a square (X):', (answer) => {
-        if (board[answer] === undefined || board[answer] === 'O' || board[answer] === 'X') {
-          console.log('Not a valid square');
-          ticTacToeGame(board, player)
-        }
-        else {
-          board[answer]='X';
-          checkBoard(board, player, ticTacToeGame);
-        }
-      })
-    }
-    if (player === 2) {
-      rl.question('Player 2 please fill in a square (O):', (answer) => {
-        if (board[answer] === undefined || board[answer] === 'O' || board[answer] === 'X') {
-          console.log('Not a valid square');
-          ticTacToeGame(board, player)
-        }
-        else {
-          board[answer]='O';
-          checkBoard(board, player, ticTacToeGame);
-        }
-      })
-    }
+    rl.question(`Player ${player} please enter a column & row to fill in a square (${moves[player]}):`, (answer) => {
+      if (board[answer] === undefined || board[answer] === 'O' || board[answer] === 'X') {
+        console.log('Not a valid square');
+        ticTacToeGame(board, player);
+      }
+      else {
+        board[answer] = moves[player];
+        checkBoard(board, player, ticTacToeGame);
+      }
+    })
   }
 }
 
 ticTacToeGame(board, 1);
 
+module.exports = {
+  ticTacToeGame
+}
